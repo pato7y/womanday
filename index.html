@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>International Women's Day Celebration</title>
+<style>
+    body {
+       /*  font-family: Arial, sans-serif; */
+        font-family: "Sofia", sans-serif;
+        background: url('https://source.unsplash.com/1920x1080/?womens-day') center/cover fixed no-repeat;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    #container {
+        max-width: 600px;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+    h1 {
+        color: #c2185b;
+        margin-top: 0;
+    }
+    p {
+        margin-top: 0;
+    }
+    input[type="text"], textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        border: 2px solid #c2185b;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #c2185b;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #a0184e;
+    }
+    .message-container {
+        margin-top: 20px;
+        text-align: left;
+    }
+    .message {
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: #fce4ec;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+    }
+    .heart-icon {
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #c2185b;
+        font-size: 24px;
+    }
+    #messagesLink {
+        color: #c2185b;
+        text-decoration: none;
+        font-weight: bold;
+        margin-top: 20px;
+        display: block;
+    }
+</style>
+</head>
+<body>
+<div id="container">
+    <h1>International Women's Day Celebration</h1>
+    <p>Enter your name to get a personalized message:</p>
+    <input type="text" id="nameInput" placeholder="Enter your name">
+    <br><br>
+    <label for="colorPicker">Choose a color for your message:</label>
+    <input type="color" id="colorPicker" value="#000000">
+    <br><br>
+    <button onclick="generateMessage()">Get Message</button>
+    <div id="message"></div>
+    <a href="messages.html" id="messagesLink" target="_blank">See Messages from Other Women</a>
+
+   <!-- <a href="messages.html" id="messagesLink">See Messages from Other Women</a> -->
+</div>
+
+<script>
+    function generateMessage() {
+        let name = document.getElementById("nameInput").value.trim();
+        if (name === "") {
+            alert("Please enter your name!");
+            return;
+        }
+
+        let acrostic = generateAcrostic(name);
+        let color = document.getElementById("colorPicker").value;
+        let message = `<div class="message-container">`;
+        message += `<div class="message" style="background-color: ${color}; color: #fff;">`;
+        message += `<span class="heart-icon">&hearts;</span>`;
+        message += `<p>Dear ${name},</p>`;
+        message += `<p>Happy International Women's Day!</p>`;
+        message += `<p>Here's a special acrostic poem just for you:</p>`;
+        message += `<p>${acrostic}</p>`;
+        message += `<p>Share a message for all the other women:</p>`;
+        message += `<textarea id="userMessage" rows="4" cols="50" placeholder="Write your message here..."></textarea>`;
+        message += `<button onclick="storeMessage('${name}')">Save Message</button>`;
+        message += `</div></div>`;
+        document.getElementById("message").innerHTML = message;
+    }
+
+    function generateAcrostic(name) {
+        let acrosticMessages = {
+            "A": [
+                "Aim high and reach for the stars",
+                "Advocate for what you believe in",
+                "Appreciate the strength within you",
+                "Assert yourself with confidence",
+                "Accept challenges as opportunities"
+            ],
+            "B": [
+                "Believe in yourself and your dreams",
+                "Be brave in the face of adversity",
+                "Build a future full of hope",
+                "Be bold in pursuit of your goals",
+                "Blossom into the best version of yourself"
+            ],
+            "C": [
+                "Celebrate your uniqueness",
+                "Create the life you envision",
+                "Cherish the moments of joy",
+                "Cultivate a sense of gratitude",
+                "Conquer your fears and doubts"
+            ],
+            "D": [
+                "Dare to dream big and bold",
+                "Dance to the rhythm of your heart",
+                "Discover the magic within you",
+                "Delight in the beauty of life",
+                "Dwell in possibility and wonder"
+            ],
+            "E": [
+                "Embrace your true self",
+                "Elevate the voices of others",
+                "Empower yourself and those around you",
+                "Envision a world of equality and justice",
+                "Explore the depths of your imagination"
+            ],
+            "F": [
+                "Fearlessly pursue your passions",
+                "Find strength in vulnerability",
+                "Foster connections that nourish your soul",
+                "Fuel your fire with determination",
+                "Forge your own path with courage"
+            ],
+            "G": [
+                "Grow through every experience",
+                "Give generously from the heart",
+                "Glow with confidence and grace",
+                "Grasp opportunities with both hands",
+                "Guide others with wisdom and compassion"
+            ],
+            "H": [
+                "Honor your journey and your growth",
+                "Harness your inner strength",
+                "Heal from past wounds and setbacks",
+                "Hold space for your dreams to flourish",
+                "Help others rise with kindness and empathy"
+            ],
+            "I": [
+                "Inspire others with your authenticity",
+                "Imagine a world filled with love and equality",
+                "Ignite your passion and purpose",
+                "Invest in yourself and your dreams",
+                "Illuminate the world with your brilliance"
+            ],
+            "J": [
+                "Journey boldly into the unknown",
+                "Juggle your roles with grace and resilience",
+                "Jolt yourself out of your comfort zone",
+                "Join hands with others to create change",
+                "Joyfully celebrate the beauty of womanhood"
+            ],
+            "K": [
+                "Keep your heart open to new experiences",
+                "Kindle the flames of creativity within you",
+                "Knock down barriers with determination",
+                "Know your worth and stand tall",
+                "Kickstart your journey to self-discovery"
+            ],
+            "L": [
+                "Love yourself fiercely and unapologetically",
+                "Lift others up with words of encouragement",
+                "Lean into your inner strength",
+                "Laugh freely and with abandon",
+                "Lead with compassion and empathy"
+            ],
+            "M": [
+                "Make your dreams a reality",
+                "Manifest the life you desire",
+                "Master the art of resilience",
+                "Mobilize others for positive change",
+                "Melt away self-doubt with confidence"
+            ],
+            "N": [
+                "Nurture your mind, body, and spirit",
+                "Navigate life's twists and turns with grace",
+                "Never underestimate your own power",
+                "Nourish your soul with love and kindness",
+                "Nurture your dreams with care and dedication"
+            ],
+            "O": [
+                "Open your heart to new possibilities",
+                "Optimize your potential for greatness",
+                "Overcome obstacles with determination",
+                "Offer kindness to yourself and others",
+                "Own your story and your journey"
+            ],
+            "P": [
+                "Pursue your passions with courage",
+                "Practice self-love and self-compassion",
+                "Persist in the face of adversity",
+                "Promote equality and justice for all",
+                "Push past your limits and soar"
+            ],
+            "Q": [
+                "Question the status quo and advocate for change",
+                "Quell your fears with bravery and resilience",
+                "Quench your thirst for knowledge and growth",
+                "Quicken your pace toward your dreams",
+                "Quiet the voice of doubt and listen to your heart"
+            ],
+            "R": [
+                "Rise above challenges with grace",
+                "Radiate confidence and self-assurance",
+                "Revel in the beauty of your uniqueness",
+                "Reimagine a world where all are valued",
+                "Reach for the stars and beyond"
+            ],
+            "S": [
+                "Stay true to yourself and your values",
+                "Shine brightly in your own unique way",
+                "Strive for excellence in all you do",
+                "Sow seeds of kindness wherever you go",
+                "Stand tall and proud in your identity"
+            ],
+            "T": [
+                "Trust in your abilities and intuition",
+                "Take risks and embrace uncertainty",
+                "Transform challenges into opportunities",
+                "Treat yourself with love and compassion",
+                "Treasure the journey as much as the destination"
+            ],
+            "U": [
+                "Uplift others with words of encouragement",
+                "Unleash your inner strength and resilience",
+                "Understand that you are enough just as you are",
+                "Unite with others to create positive change",
+                "Use your voice to advocate for what is right"
+            ],
+            "V": [
+                "Value yourself and your contributions",
+                "Venture into the unknown with courage",
+                "Visualize the life you desire and deserve",
+                "Voice your opinions and ideas with confidence",
+                "Vibrate with the energy of empowerment"
+            ],
+            "W": [
+                "Walk boldly in the direction of your dreams",
+                "Wield your power to create positive change",
+                "Welcome challenges as opportunities for growth",
+                "Wear your scars as badges of strength",
+                "Whisper words of encouragement to yourself"
+            ],
+            "X": [
+                "Xperience the joy of self-discovery",
+                "Xcel in all you set out to achieve",
+                "Xpand your horizons and embrace new possibilities",
+                "Xpress gratitude for the journey you're on",
+                "Xplore the depths of your own potential"
+            ],
+            "Y": [
+                "Yearn for a world filled with peace and equality",
+                "Yield to no limitations or boundaries",
+                "Yoke yourself to the pursuit of justice",
+                "Yield gracefully to the ebb and flow of life",
+                "Yield to the power of your own inner wisdom"
+            ],
+            "Z": [
+                "Zero in on your goals with laser focus",
+                "Zestfully pursue your dreams and passions",
+                "Zen out and find peace within yourself",
+                "Zealously advocate for what you believe in",
+                "Zigzag your way through obstacles with ease"
+            ]
+        };
+        
+        name = name.toUpperCase();
+        
+        let acrostic = "";
+        for (let i = 0; i < name.length; i++) {
+            let initial = name[i];
+            if (initial in acrosticMessages) {
+                let messageIndex = Math.floor(Math.random() * acrosticMessages[initial].length);
+                let message = acrosticMessages[initial][messageIndex];
+                acrostic += initial + ": " + message + "<br>";
+            }
+        }
+        
+        return acrostic;
+    }
+
+    function storeMessage(name) {
+        let userMessage = document.getElementById("userMessage").value.trim();
+        if (userMessage === "") {
+            alert("Please enter a message!");
+            return;
+        }
+        localStorage.setItem(name, userMessage);
+        alert("Message saved successfully!");
+        document.getElementById("userMessage").value = "";
+    }
+</script>
+</body>
+</html>
+
